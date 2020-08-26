@@ -12,17 +12,25 @@ class AddScreen extends StatelessWidget {
             children: [
               Row(children: [
                 Container(
-                  width: 160,
+                  width: 140,
                   margin: new EdgeInsets.symmetric(horizontal: 10.0),
                   alignment: Alignment.topRight,
-                  child: Text("Name"),
+                  child: Text(
+                    "Name",
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
+                  ),
                 ),
                 Container(
-                  width: 100.0,
+                  width: 200.0,
                   child: TextField(
                     decoration: InputDecoration(
-                        border: InputBorder.none, hintText: 'Enter a name'),
-                        textAlign: TextAlign.center,
+                        hintText: 'Enter a name'),
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 30,
+                    ),
                   ),
                 ),
               ]),
