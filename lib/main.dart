@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_scores_list/presentation/add_screen.dart';
+
+import 'config/routes.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,7 +12,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'My List',
+      routes: {
+        AppRoutes.pageAddData: (context) => AddScreen(),
+      },
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -50,19 +57,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   final items = ['JJ', 'Poon', 'Geng', 'John'];
   final scores = [80, 77, 85, 60];
 
@@ -95,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   scores[index].toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 50,
+                    fontSize: 45,
                   ),
                 ),
               ),
@@ -105,8 +99,7 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () => Navigator.of(context).pushNamed(AppRoutes.pageAddData),
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
