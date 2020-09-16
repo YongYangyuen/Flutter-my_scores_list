@@ -57,8 +57,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final items = ['JJ', 'Poon', 'Geng', 'John'];
-  final scores = [80, 77, 85, 60];
+  List items = ['JJ', 'Poon', 'Geng', 'John'];
+  List scores = [80, 77, 85, 60];
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   scores[index].toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 45,
+                    fontSize: 50,
                   ),
                 ),
               ),

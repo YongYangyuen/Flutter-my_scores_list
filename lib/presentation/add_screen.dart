@@ -7,7 +7,7 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  String text = ' ';
+  String text = '';
 
   @override
   void initState() {
@@ -17,6 +17,7 @@ class _AddScreenState extends State<AddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomPadding: false,
         appBar: AppBar(
           title: Text("Add Page"),
         ),
@@ -47,7 +48,14 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                 ),
               ]),
-              Container(child: Text(text)),
+              Container(
+                  decoration: BoxDecoration(color: Colors.blue),
+                  child: TextField(
+                    enabled: false,
+                    controller: TextEditingController(text: text),
+                    style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  )),
               Container(
                   child: NumericKeyboard(
                       onKeyboardTap: _onKeyboardTap,
