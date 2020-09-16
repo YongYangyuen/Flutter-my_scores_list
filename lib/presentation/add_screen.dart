@@ -1,8 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 
-class AddScreen extends StatelessWidget {
-  String text;
+class AddScreen extends StatefulWidget {
+  @override
+  _AddScreenState createState() => _AddScreenState();
+}
+
+class _AddScreenState extends State<AddScreen> {
+  String text = ' ';
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +47,15 @@ class AddScreen extends StatelessWidget {
                   ),
                 ),
               ]),
-              Container(
-                child: TextField(
-                  onSubmitted: (text) {
-                    print(text);
-                  },
-                ),
-              ),
+              Container(child: Text(text)),
               Container(
                   child: NumericKeyboard(
                       onKeyboardTap: _onKeyboardTap,
                       textColor: Colors.red,
                       rightButtonFn: () {
-                        text = text.substring(0, text.length - 1);
+                        setState(() {
+                          text = text.substring(0, text.length - 1);
+                        });
                       },
                       rightIcon: Icon(
                         Icons.backspace,
@@ -69,6 +75,8 @@ class AddScreen extends StatelessWidget {
   }
 
   _onKeyboardTap(String value) {
-    text = text + value;
+    setState(() {
+      text = text + value;
+    });
   }
 }
