@@ -59,7 +59,7 @@ class _AddScreenState extends State<AddScreen> {
               Container(
                   child: NumericKeyboard(
                       onKeyboardTap: _onKeyboardTap,
-                      textColor: Colors.red,
+                      textColor: Colors.black,
                       rightButtonFn: () {
                         setState(() {
                           text = text.substring(0, text.length - 1);
@@ -74,7 +74,7 @@ class _AddScreenState extends State<AddScreen> {
                       },
                       leftIcon: Icon(
                         Icons.check,
-                        color: Colors.red,
+                        color: Colors.green,
                       ),
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly)),
             ],
