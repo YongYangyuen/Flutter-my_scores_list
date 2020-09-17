@@ -1,13 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:my_scores_list/config/routes.dart';
+import 'package:my_scores_list/main.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 
 class AddScreen extends StatefulWidget {
   @override
   _AddScreenState createState() => _AddScreenState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      routes: {
+        AppRoutes.home: (context) => MyHomePage(),
+      },
+    );
+  }
 }
 
 class _AddScreenState extends State<AddScreen> {
-  String text = '';
+  String textName = '';
+  String textScore = '';
 
   @override
   void initState() {
@@ -40,6 +50,7 @@ class _AddScreenState extends State<AddScreen> {
                 Container(
                   width: 200.0,
                   child: TextField(
+                    controller: TextEditingController(text: textName),
                     decoration: InputDecoration(hintText: 'Enter a name'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -52,7 +63,7 @@ class _AddScreenState extends State<AddScreen> {
                   decoration: BoxDecoration(color: Colors.blue),
                   child: TextField(
                     enabled: false,
-                    controller: TextEditingController(text: text),
+                    controller: TextEditingController(text: textScore),
                     style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   )),
@@ -62,7 +73,8 @@ class _AddScreenState extends State<AddScreen> {
                       textColor: Colors.black,
                       rightButtonFn: () {
                         setState(() {
-                          text = text.substring(0, text.length - 1);
+                          textScore =
+                              textScore.substring(0, textScore.length - 1);
                         });
                       },
                       rightIcon: Icon(
@@ -71,6 +83,7 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                       leftButtonFn: () {
                         print('left button clicked');
+                        Navigator.of(context).pushNamed(AppRoutes.home);
                       },
                       leftIcon: Icon(
                         Icons.check,
@@ -84,7 +97,7 @@ class _AddScreenState extends State<AddScreen> {
 
   _onKeyboardTap(String value) {
     setState(() {
-      text = text + value;
+      textScore = textScore + value;
     });
   }
 }

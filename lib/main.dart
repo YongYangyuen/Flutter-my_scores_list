@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_scores_list/presentation/add_screen.dart';
-
 import 'config/routes.dart';
 
 void main() {
@@ -39,7 +38,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({
+    Key key,
+    this.title,
+  }) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -57,7 +59,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List items = ['JJ', 'Poon', 'Geng', 'John'];
+  List names = ['JJ', 'Poon', 'Geng', 'John'];
   List scores = [80, 77, 85, 60];
 
   @override
@@ -73,18 +75,19 @@ class _MyHomePageState extends State<MyHomePage> {
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
+        automaticallyImplyLeading: false,
       ),
       body: Center(
           // Center is a layout widget. It takes a single child and positions it
           // in the middle of the parent.
           child: ListView.builder(
-        itemCount: items.length,
+        itemCount: names.length,
         itemBuilder: (context, index) {
           return Column(
             children: <Widget>[
               ListTile(
                 leading: Text((index + 1).toString()),
-                title: Text(items[index]),
+                title: Text(names[index]),
                 trailing: Text(
                   scores[index].toString(),
                   style: TextStyle(
@@ -99,7 +102,9 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(AppRoutes.pageAddData),
+        onPressed: () => Navigator.of(context).pushNamed(
+          AppRoutes.pageAddData,
+        ),
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
