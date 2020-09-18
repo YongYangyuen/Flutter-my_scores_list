@@ -33,7 +33,7 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          title: Text("Add Page"),
+          title: Text("Add Data"),
         ),
         body: Center(
           child: Column(
