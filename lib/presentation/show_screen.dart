@@ -36,13 +36,13 @@ class _ShowScreenState extends State<ShowScreen> {
 
     for (var i = 0; i < scores.length; i++) {
       if (leastNext == 0) {
-        if (scores[i] >= scores[widget.index] && i != widget.index) {
+        if (scores[i] > scores[widget.index] && i != widget.index) {
           leastNext = scores[i];
           leastNextIndex = i;
         }
       } else {
         if (scores[i] > scores[widget.index] && i != widget.index) {
-          if (scores[i] <= leastNext) {
+          if (scores[i] < leastNext) {
             leastNext = scores[i];
             leastNextIndex = i;
           }
@@ -89,26 +89,29 @@ class _ShowScreenState extends State<ShowScreen> {
               ),
             ),
           ),
-          Container(
-              alignment: Alignment.topRight,
-              child: MaterialButton(
-                onPressed: () => {
-                  isEdit = true,
-                  editIndex = widget.index,
-                  myControllerTextName.text = names[widget.index],
-                  textScore = scores[widget.index].toString(),
-                  Navigator.of(context).pushNamed(AppRoutes.pageAddData,
-                      arguments: AddParameters("Edit Data")),
-                },
-                color: Colors.black,
-                textColor: Colors.white,
-                child: Icon(
-                  Icons.edit,
-                  size: 24,
-                ),
-                padding: EdgeInsets.all(16),
-                shape: CircleBorder(),
-              )),
+          Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Container(
+                alignment: Alignment.topRight,
+                child: MaterialButton(
+                  onPressed: () => {
+                    isEdit = true,
+                    editIndex = widget.index,
+                    myControllerTextName.text = names[widget.index],
+                    textScore = scores[widget.index].toString(),
+                    Navigator.of(context).pushNamed(AppRoutes.pageAddData,
+                        arguments: AddParameters("Edit Data")),
+                  },
+                  color: Colors.black,
+                  textColor: Colors.white,
+                  child: Icon(
+                    Icons.edit,
+                    size: 24,
+                  ),
+                  padding: EdgeInsets.all(16),
+                  shape: CircleBorder(),
+                )),
+          ),
         ]),
         Container(
           alignment: Alignment.bottomCenter,
@@ -129,9 +132,10 @@ class _ShowScreenState extends State<ShowScreen> {
             visible: !isLastOne(),
             child: Container(
               child: ListTile(
-                onTap: () => Navigator.of(context).pushNamed(
-                    AppRoutes.pageShowData,
-                    arguments: ShowParameters(findNextOneIndex())),
+                onTap: () => {
+                  Navigator.of(context).pushNamed(AppRoutes.pageShowData,
+                      arguments: ShowParameters(findNextOneIndex())),
+                },
                 leading: Text((findNextOneIndex() + 1).toString(),
                     style: TextStyle(fontSize: 30)),
                 title: Text(
