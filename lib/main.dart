@@ -6,6 +6,9 @@ void main() {
   runApp(MyApp());
 }
 
+List names = ['JJ', 'Poon', 'Geng', 'John'];
+List scores = [80, 77, 85, 60];
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
@@ -43,6 +46,11 @@ class MyHomePage extends StatefulWidget {
     this.title,
   }) : super(key: key);
 
+  void updateData(String name, int score) {
+    names.add(name);
+    scores.add(score);
+  }
+
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
   // how it looks.
@@ -59,9 +67,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List names = ['JJ', 'Poon', 'Geng', 'John'];
-  List scores = [80, 77, 85, 60];
-
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done

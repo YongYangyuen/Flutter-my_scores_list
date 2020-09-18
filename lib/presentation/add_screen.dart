@@ -24,6 +24,10 @@ class _AddScreenState extends State<AddScreen> {
     super.initState();
   }
 
+  MyHomePage _myHomePage = new MyHomePage();
+
+  final myControllerTextName = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +54,7 @@ class _AddScreenState extends State<AddScreen> {
                 Container(
                   width: 200.0,
                   child: TextField(
-                    controller: TextEditingController(text: textName),
+                    controller: myControllerTextName,
                     decoration: InputDecoration(hintText: 'Enter a name'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
@@ -64,6 +68,7 @@ class _AddScreenState extends State<AddScreen> {
                   child: TextField(
                     enabled: false,
                     controller: TextEditingController(text: textScore),
+                    decoration: InputDecoration(hintText: 'Enter a score'),
                     style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   )),
@@ -83,6 +88,10 @@ class _AddScreenState extends State<AddScreen> {
                       ),
                       leftButtonFn: () {
                         print('left button clicked');
+                        print(myControllerTextName.text);
+                        print(textScore);
+                        _myHomePage.updateData(
+                            myControllerTextName.text, int.parse(textScore));
                         Navigator.of(context).pushNamed(AppRoutes.home);
                       },
                       leftIcon: Icon(
