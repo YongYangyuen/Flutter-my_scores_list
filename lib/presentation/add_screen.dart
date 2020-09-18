@@ -3,7 +3,17 @@ import 'package:my_scores_list/config/routes.dart';
 import 'package:my_scores_list/main.dart';
 import 'package:numeric_keyboard/numeric_keyboard.dart';
 
+String textScore;
+final myControllerTextName = TextEditingController();
+
+class AddParameters {
+  final int index;
+  const AddParameters(this.index);
+}
+
 class AddScreen extends StatefulWidget {
+  final int index;
+  AddScreen({this.index});
   @override
   _AddScreenState createState() => _AddScreenState();
   Widget build(BuildContext context) {
@@ -16,17 +26,12 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
-  String textName = '';
-  String textScore = '';
-
   @override
   void initState() {
     super.initState();
   }
 
   MyHomePage _myHomePage = new MyHomePage();
-
-  final myControllerTextName = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

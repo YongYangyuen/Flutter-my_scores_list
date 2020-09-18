@@ -49,8 +49,13 @@ class MyHomePage extends StatefulWidget {
   }) : super(key: key);
 
   void updateData(String name, int score) {
-    names.add(name);
-    scores.add(score);
+    if (isEdit) {
+      names[editIndex] = name;
+      scores[editIndex] = score;
+    } else {
+      names.add(name);
+      scores.add(score);
+    }
   }
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -122,9 +127,13 @@ class _MyHomePageState extends State<MyHomePage> {
         },
       )),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed(
-          AppRoutes.pageAddData,
-        ),
+        onPressed: () => {
+          myControllerTextName.clear(),
+          textScore = '',
+          Navigator.of(context).pushNamed(
+            AppRoutes.pageAddData,
+          ),
+        },
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

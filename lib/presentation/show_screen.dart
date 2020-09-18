@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_scores_list/config/routes.dart';
 import 'package:my_scores_list/main.dart';
-import 'package:my_scores_list/presentation/add_screen.dart';
+import 'add_screen.dart';
+
+bool isEdit = false;
+int editIndex;
 
 class ShowParameters {
   final int index;
@@ -16,9 +19,7 @@ class ShowScreen extends StatefulWidget {
   _ShowScreenState createState() => _ShowScreenState();
   Widget build(BuildContext context) {
     return MaterialApp(
-      routes: {
-        AppRoutes.pageAddData: (context) => AddScreen(),
-      },
+      onGenerateRoute: _registerRouteWithParameters,
     );
   }
 }
@@ -67,26 +68,48 @@ class _ShowScreenState extends State<ShowScreen> {
         title: Text("Data - " + names[widget.index]),
       ),
       body: Column(children: [
-        Container(
-          alignment: Alignment.center,
-          height: 200,
-          decoration: BoxDecoration(color: Colors.blue, border: Border.all()),
-          child: ListTile(
-            leading: Text((widget.index + 1).toString(),
-                style: TextStyle(fontSize: 30)),
-            title: Text(
-              names[widget.index],
-              style: TextStyle(fontSize: 30),
-            ),
-            trailing: Text(
-              scores[widget.index].toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 55,
+        Stack(children: [
+          Container(
+            alignment: Alignment.center,
+            height: 200,
+            decoration: BoxDecoration(color: Colors.blue, border: Border.all()),
+            child: ListTile(
+              leading: Text((widget.index + 1).toString(),
+                  style: TextStyle(fontSize: 30)),
+              title: Text(
+                names[widget.index],
+                style: TextStyle(fontSize: 30),
+              ),
+              trailing: Text(
+                scores[widget.index].toString(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 55,
+                ),
               ),
             ),
           ),
-        ),
+          Container(
+              alignment: Alignment.topRight,
+              child: MaterialButton(
+                onPressed: () => {
+                  isEdit = true,
+                  editIndex = widget.index,
+                  myControllerTextName.text = names[widget.index],
+                  textScore = scores[widget.index].toString(),
+                  Navigator.of(context).pushNamed(AppRoutes.pageAddData,
+                      arguments: AddParameters(widget.index)),
+                },
+                color: Colors.black,
+                textColor: Colors.white,
+                child: Icon(
+                  Icons.edit,
+                  size: 24,
+                ),
+                padding: EdgeInsets.all(16),
+                shape: CircleBorder(),
+              )),
+        ]),
         Container(
           alignment: Alignment.bottomCenter,
           height: MediaQuery.of(context).size.height - 450,
@@ -140,5 +163,14 @@ class _ShowScreenState extends State<ShowScreen> {
         )
       ]),
     );
+  }
+}
+
+Route _registerRouteWithParameters(RouteSettings settings) {
+  if (settings.name == AppRoutes.pageAddData) {
+    return MaterialPageRoute(builder: (context) {
+      AddParameters parameter = settings.arguments;
+      return AddScreen(index: parameter.index);
+    });
   }
 }
