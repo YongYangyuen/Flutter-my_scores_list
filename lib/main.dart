@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_scores_list/presentation/add_screen.dart';
+import 'package:my_scores_list/presentation/show_screen.dart';
 import 'config/routes.dart';
 
 void main() {
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.pageAddData: (context) => AddScreen(),
       },
+      onGenerateRoute: _registerRouteWithParameters,
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -91,13 +93,26 @@ class _MyHomePageState extends State<MyHomePage> {
           return Column(
             children: <Widget>[
               ListTile(
-                leading: Text((index + 1).toString()),
-                title: Text(names[index]),
+                onTap: () => Navigator.of(context).pushNamed(
+                    AppRoutes.pageShowData,
+                    arguments: ShowParameters(index)),
+                leading: Text(
+                  (index + 1).toString(),
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
+                title: Text(
+                  names[index],
+                  style: TextStyle(
+                    fontSize: 30,
+                  ),
+                ),
                 trailing: Text(
                   scores[index].toString(),
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 50,
+                    fontSize: 55,
                   ),
                 ),
               ),
@@ -113,5 +128,14 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+}
+
+Route _registerRouteWithParameters(RouteSettings settings) {
+  if (settings.name == AppRoutes.pageShowData) {
+    return MaterialPageRoute(builder: (context) {
+      ShowParameters parameter = settings.arguments;
+      return ShowScreen(index: parameter.index);
+    });
   }
 }

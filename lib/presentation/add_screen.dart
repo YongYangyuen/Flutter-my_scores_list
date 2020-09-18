@@ -55,7 +55,7 @@ class _AddScreenState extends State<AddScreen> {
                   width: 200.0,
                   child: TextField(
                     controller: myControllerTextName,
-                    decoration: InputDecoration(hintText: 'Enter a name'),
+                    decoration: InputDecoration(hintText: 'Enter name'),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 30,
@@ -68,7 +68,7 @@ class _AddScreenState extends State<AddScreen> {
                   child: TextField(
                     enabled: false,
                     controller: TextEditingController(text: textScore),
-                    decoration: InputDecoration(hintText: 'Enter a score'),
+                    decoration: InputDecoration(hintText: 'Enter score'),
                     style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   )),
