@@ -54,6 +54,11 @@ class _ShowScreenState extends State<ShowScreen> {
     return leastNextIndex;
   }
 
+  bool isLastOne() {
+    if (findNextOneIndex() == widget.index) return true;
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,23 +102,40 @@ class _ShowScreenState extends State<ShowScreen> {
             """,
           ),
         ),
-        Container(
-          child: ListTile(
-            onTap: () => Navigator.of(context).pushNamed(AppRoutes.pageShowData,
-                arguments: ShowParameters(findNextOneIndex())),
-            leading: Text((findNextOneIndex() + 1).toString(),
-                style: TextStyle(fontSize: 30)),
-            title: Text(
-              names[findNextOneIndex()],
-              style: TextStyle(fontSize: 30),
-            ),
-            trailing: Text(
-              scores[findNextOneIndex()].toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 55,
+        Visibility(
+            visible: !isLastOne(),
+            child: Container(
+              child: ListTile(
+                onTap: () => Navigator.of(context).pushNamed(
+                    AppRoutes.pageShowData,
+                    arguments: ShowParameters(findNextOneIndex())),
+                leading: Text((findNextOneIndex() + 1).toString(),
+                    style: TextStyle(fontSize: 30)),
+                title: Text(
+                  names[findNextOneIndex()],
+                  style: TextStyle(fontSize: 30),
+                ),
+                trailing: Text(
+                  scores[findNextOneIndex()].toString(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 55,
+                  ),
+                ),
               ),
-            ),
+            )),
+        Visibility(
+          visible: isLastOne(),
+          child: Text(
+            "... No one is next ...",
+            style: TextStyle(fontSize: 30),
+          ),
+        ),
+        Visibility(
+          visible: isLastOne(),
+          child: Text(
+            "You're the BEST!!!",
+            style: TextStyle(fontSize: 20, color: Colors.red),
           ),
         )
       ]),
