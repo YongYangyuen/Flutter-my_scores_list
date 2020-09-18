@@ -29,6 +29,31 @@ class _ShowScreenState extends State<ShowScreen> {
     super.initState();
   }
 
+  int findNextOneIndex() {
+    var leastNext = 0;
+    var leastNextIndex;
+
+    for (var i = 0; i < scores.length; i++) {
+      if (leastNext == 0) {
+        if (scores[i] >= scores[widget.index] && i != widget.index) {
+          leastNext = scores[i];
+          leastNextIndex = i;
+        }
+      } else {
+        if (scores[i] > scores[widget.index] && i != widget.index) {
+          if (scores[i] <= leastNext) {
+            leastNext = scores[i];
+            leastNextIndex = i;
+          }
+        }
+      }
+    }
+
+    if (leastNextIndex == null) leastNextIndex = widget.index;
+
+    return leastNextIndex;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,6 +88,32 @@ class _ShowScreenState extends State<ShowScreen> {
           child: Text(
             "Next Person >",
             style: TextStyle(fontSize: 50),
+          ),
+        ),
+        Container(
+          child: Text(
+            """
+            
+            """,
+          ),
+        ),
+        Container(
+          child: ListTile(
+            onTap: () => Navigator.of(context).pushNamed(AppRoutes.pageShowData,
+                arguments: ShowParameters(findNextOneIndex())),
+            leading: Text((findNextOneIndex() + 1).toString(),
+                style: TextStyle(fontSize: 30)),
+            title: Text(
+              names[findNextOneIndex()],
+              style: TextStyle(fontSize: 30),
+            ),
+            trailing: Text(
+              scores[findNextOneIndex()].toString(),
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 55,
+              ),
+            ),
           ),
         )
       ]),
