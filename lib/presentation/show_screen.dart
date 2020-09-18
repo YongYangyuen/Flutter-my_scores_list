@@ -98,7 +98,7 @@ class _ShowScreenState extends State<ShowScreen> {
                   myControllerTextName.text = names[widget.index],
                   textScore = scores[widget.index].toString(),
                   Navigator.of(context).pushNamed(AppRoutes.pageAddData,
-                      arguments: AddParameters(widget.index)),
+                      arguments: AddParameters("Edit Data")),
                 },
                 color: Colors.black,
                 textColor: Colors.white,
@@ -170,7 +170,7 @@ Route _registerRouteWithParameters(RouteSettings settings) {
   if (settings.name == AppRoutes.pageAddData) {
     return MaterialPageRoute(builder: (context) {
       AddParameters parameter = settings.arguments;
-      return AddScreen(index: parameter.index);
+      return AddScreen(title: parameter.title);
     });
   }
 }

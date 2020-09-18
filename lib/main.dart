@@ -17,9 +17,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My List',
-      routes: {
-        AppRoutes.pageAddData: (context) => AddScreen(),
-      },
       onGenerateRoute: _registerRouteWithParameters,
       theme: ThemeData(
         // This is the theme of your application.
@@ -56,6 +53,7 @@ class MyHomePage extends StatefulWidget {
       names.add(name);
       scores.add(score);
     }
+    isEdit = false;
   }
 
   // This widget is the home page of your application. It is stateful, meaning
@@ -130,9 +128,8 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: () => {
           myControllerTextName.clear(),
           textScore = '',
-          Navigator.of(context).pushNamed(
-            AppRoutes.pageAddData,
-          ),
+          Navigator.of(context).pushNamed(AppRoutes.pageAddData,
+              arguments: AddParameters("Add Data")),
         },
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
@@ -145,6 +142,12 @@ Route _registerRouteWithParameters(RouteSettings settings) {
     return MaterialPageRoute(builder: (context) {
       ShowParameters parameter = settings.arguments;
       return ShowScreen(index: parameter.index);
+    });
+  }
+  if (settings.name == AppRoutes.pageAddData) {
+    return MaterialPageRoute(builder: (context) {
+      AddParameters parameter = settings.arguments;
+      return AddScreen(title: parameter.title);
     });
   }
 }

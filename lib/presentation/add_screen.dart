@@ -7,15 +7,16 @@ String textScore;
 final myControllerTextName = TextEditingController();
 
 class AddParameters {
-  final int index;
-  const AddParameters(this.index);
+  final String title;
+  AddParameters(this.title);
 }
 
 class AddScreen extends StatefulWidget {
-  final int index;
-  AddScreen({this.index});
+  final String title;
+  AddScreen({this.title});
   @override
   _AddScreenState createState() => _AddScreenState();
+
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
@@ -38,7 +39,7 @@ class _AddScreenState extends State<AddScreen> {
     return Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          title: Text("Add Data"),
+          title: Text(widget.title),
         ),
         body: Center(
           child: Column(
